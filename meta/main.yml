@@ -1,0 +1,33 @@
+---
+galaxy_info:
+  author: Tungsten Fabric Developers
+  description: Role to manage borg backup setup
+  # Some suggested licenses:
+  # - BSD (default)
+  # - MIT
+  # - GPLv2
+  # - GPLv3
+  # - Apache
+  # - CC-BY
+  license: Apache
+  min_ansible_version: 2.0
+  #
+  # Below are all platforms currently available. Just uncomment
+  # the ones that apply to your role. If you don't see your
+  # platform on this list, let us know and we'll get it added!
+  #
+  platforms:
+  - name: EL
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  - name: GenericLinux
+    versions:
+    - all
+  #  - any
+  categories:
+  - system
+dependencies: []
+

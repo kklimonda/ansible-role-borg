@@ -1,0 +1,43 @@
+- name: Ensure that the borg keys directory exists
+  file:
+    path: /etc/borg/keys/
+    state: directory
+    owner: root
+    group: root
+    mode: 0700
+
+- name: Create keyfile for the machine
+  copy:
+    content: "{{ borg_client_keyfile }}"
+    dest: "/etc/borg/keys/{{ ansible_fqdn }}.key"
+
+- name: Create borg pre.d scripts
+  copy:
+    content: "{{ item.script }}"
+    dest: "/etc/borg/pre.d/{{ item.name }}"
+    mode: 0755
+    owner: root
+    group: root
+  when: item.phase == 'pre'
+  with_items: "{{ borg_backups.scripts }}"
+
+- name: Create borg post.d scripts
+  copy:
+    content: "{{ item.script }}"
+    dest: "/etc/borg/post.d/{{ item.name }}"
+    mode: 0755
+    owner: root
+    group: root
+  when: item.phase == 'post'
+  with_items: "{{ borg_backups.scripts }}"
+
+- name: Create file include/exclude patterns
+  copy:
+    content: "{{ borg_backups.patterns }}"
+    dest: "/etc/borg/patterns"
+
+- name: Create borg environment file
+  template:
+    src: borg.env.j2
+    dest: /etc/borg/borg.env
+

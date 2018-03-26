@@ -1,0 +1,8 @@
+- include: common.yaml
+
+- include: client.yaml
+  when: borg_backups is defined
+
+- include: server.yaml
+  when: borg_clients is defined
+
