@@ -15,6 +15,9 @@
   copy:
     content: "{{ borg_client_ssh_private_key }}"
     dest: "/etc/borg/id_rsa"
+    mode: 0600
+    owner: root
+    group: root
 
 - name: Create borg pre.d scripts
   copy:
