@@ -2,4 +2,6 @@
 borg_version: 1.1.4
 borg_url: https://github.com/borgbackup/borg/releases/download/{{ borg_version }}/borg-linux64
 borg_checksum: sha256:4ecf507f21f0db7c437b2ef34566273d7ba5a7d05e921c6f0e3406c3f96933a7
+borg_binary: /opt/borg/bin/borg-{{ borg_version }}
+borg_binary_symlink: "{{ borg_binary | dirname }}/borg"
 

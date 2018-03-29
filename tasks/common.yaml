@@ -1,25 +1,20 @@
 ---
-- name: Ensure that directory structure is in place
+- name: Ensure that the borg directory exists
   file:
-    path: "{{ item }}"
+    path: "{{ borg_binary | dirname }}"
     state: directory
     recurse: true
-  with_items:
-    - /etc/borg/
-    - /etc/borg/pre.d/
-    - /etc/borg/post.d/
-    - /opt/borg/bin/
 
 - name: Fetch borg binary
   get_url:
     url: "{{ borg_url }}"
-    dest: "/opt/borg/bin/borg-{{ borg_version }}"
+    dest: "{{ borg_binary }}"
     mode: "0755"
     checksum: "{{ borg_checksum }}"
 
 - name: Create a borg unversioned symlink
   file:
-    src: "/opt/borg/bin/borg-{{ borg_version }}"
-    dest: "/opt/borg/bin/borg"
+    src: "{{ borg_binary }}"
+    dest: "{{ borg_binary_symlink }}"
     state: link
 

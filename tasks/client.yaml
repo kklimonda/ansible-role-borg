@@ -1,3 +1,13 @@
+- name: Ensure that the borg client directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: true
+  with_items:
+    - /etc/borg/
+    - /etc/borg/pre.d/
+    - /etc/borg/post.d/
+
 - name: Ensure that the borg keys directory exists
   file:
     path: /etc/borg/keys/
