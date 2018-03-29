@@ -11,6 +11,11 @@
     content: "{{ borg_client_keyfile }}"
     dest: "/etc/borg/keys/{{ ansible_fqdn }}.key"
 
+- name: Create ssh private key for the machine
+  copy:
+    content: "{{ borg_client_ssh_private_key }}"
+    dest: "/etc/borg/id_rsa"
+
 - name: Create borg pre.d scripts
   copy:
     content: "{{ item.script }}"
@@ -35,6 +40,14 @@
   copy:
     content: "{{ borg_backups.patterns }}"
     dest: "/etc/borg/patterns"
+
+- name: Create the main borg backup script
+  copy:
+    src: files/backup.sh
+    dest: /etc/borg/backup.sh
+    mode: 0700
+    owner: root
+    group: root
 
 - name: Create borg environment file
   template:
