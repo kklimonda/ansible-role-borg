@@ -35,6 +35,18 @@ info "Starting backup"
 
 backup_exit=$?
 
+info "Running post scripts"
+
+for script in /etc/borg/post.d/*; do
+    $script
+    exit_code=$?
+    if [ $exit_code -ne 0 ]; then
+        info "Script $script returned $exit_code. Aborting backup."
+        exit $exit_code
+    fi
+done
+
+
 info "Pruning repository"
 
 # Use the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
