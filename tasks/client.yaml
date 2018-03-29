@@ -67,3 +67,9 @@
     src: borg.env.j2
     dest: /etc/borg/borg.env
 
+- name: Create borg backup crontab entry
+  cron:
+    name: "borg backup"
+    special_time: hourly
+    job: "/etc/borg/backup.sh >> /var/log/borg_backup.log"
+
