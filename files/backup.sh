@@ -23,7 +23,6 @@ info "Starting backup"
 
 /opt/borg/borg create                  \
     --verbose                          \
-    --filter AME                       \
     --list                             \
     --stats                            \
     --show-rc                          \
