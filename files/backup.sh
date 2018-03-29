@@ -1,7 +1,7 @@
 #!/bin/bash
 source /etc/borg/borg.env
 
-info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
+info() { printf "%s %s\n" "$( date )" "$*" >&2; }
 
 trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
 
