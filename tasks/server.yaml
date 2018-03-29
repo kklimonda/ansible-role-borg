@@ -1,0 +1,9 @@
+- name: Ensure that the borg repos directory exists
+  file:
+    path: "{{ borg_repo_root }}"
+    state: directory
+    recurse: true
+
+- name: Handle borg repositories for defined clients
+  include: repository.yaml
+  with_items: "{{ borg_clients }}"
