@@ -56,6 +56,7 @@ info "Pruning repository"
 /opt/borg/borg prune                   \
     --list                             \
     --show-rc                          \
+    --keep-hourly   $BORG_KEEP_HOURLY  \
     --keep-daily    $BORG_KEEP_DAILY   \
     --keep-weekly   $BORG_KEEP_WEEKLY  \
     --keep-monthly  $BORG_KEEP_MONTHLY
