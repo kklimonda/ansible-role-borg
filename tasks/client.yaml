@@ -67,6 +67,14 @@
     src: borg.env.j2
     dest: /etc/borg/borg.env
 
+- name: Add logrotate config for borg_backup.log
+  copy:
+    src: files/borg_backup.logrotate
+    dest: /etc/logrotate.d/borg_backup
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Create borg backup crontab entry
   cron:
     name: "borg backup"
